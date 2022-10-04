@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //getComputerChoice = randomly return Rock, Paper or Scissors and assign to computerSelection
+        function getComputerChoice() {
+            let random = Math.floor(Math.random()*100)+1;
+            if (random < 33) {
+                return "Rock";
+            } else if (random >66) {
+                return "Paper"
+            } else { return "Scissors"}
+        }
+        let computerSelection;
+        
+        
+        //create playerSelection input. Case insensitive        
+        let playerSelection;
+        
+        let computerPoints = 0;
+        let playerPoints = 0;
+
+        //singleRound(playerSelection, computerSelection) return string --> You lose.Paper beats Rock
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = prompt("What do you choose? Rock, Paper or Scissors?", "Rock");
+            playerSelection = playerSelection.toLowerCase();
+            
+            if (computerSelection === "Rock"){
+                if (playerSelection === "rock"){
+                    return "Tied. Try again";
+                } else if (playerSelection === "paper"){
+                    playerPoints += 1;
+                    return "You win! Paper beats Rock";
+                } else if (playerSelection === "scissors"){
+                    computerPoints += 1;
+                    return "You lose! Rock beats Scissors";
+                } else {return "Error! You can't compete with that item"}
+            } if (computerSelection === "Paper") {
+                if (playerSelection === "rock"){
+                    computerPoints += 1;
+                    return "You lose! Paper beats Rock";
+                } else if (playerSelection === "paper"){
+                    return "Tied. Try again";
+                } else if (playerSelection === "scissors"){
+                    playerPoints += 1;
+                    return "You Win! Scissors beats Paper";
+                } else {return "Error! You can't compete with that item"}
+            } if (computerSelection === "Scissors"){
+                if (playerSelection === "rock"){
+                    playerPoints += 1;
+                    return "You Win! Rock beats Scissors";
+                } else if (playerSelection === "paper"){
+                    computerPoints += 1;
+                    return "You Lose! Scissors beat Paper";
+                } else if (playerSelection === "scissors"){
+                    return "Tied. Try again";
+                } else {return "Error! You can't compete with that item"}
+            }
+        }
+
+        function game(){
+            for (let i=0; playerPoints ===5 || computerPoints ===5; i++) {
+                computerSelection = getComputerChoice();
+                console.log(computerSelection);
+                console.log(playRound(playerSelection, computerSelection));
+                console.log("Player points: " + playerPoints + "vs Computer points: " + computerPoints);
+            }
+            (playerPoints > computerPoints) ? console.log("You've won the game!")
+            : console.log("You've lost the game");
+
+            if (playerPoints === computerPoints) {console.log("Tied game!")}      
+            return alert("It's over");
+        }
+        // console.log(playRound(playerSelection, computerSelection));
+        // alert(singleRound(playerSelection,computerSelection));
+        console.log(game());
+        
+    </script>
+
+</body>
+</html>
